@@ -15,7 +15,11 @@ git clone https://github.com/Daniil7575/insurance_task.git
 sudo docker compose build
 sudo docker compose up
 ```
-5) Зайдите в документацию сервиса по адресу - http://0.0.0.0:8000/docs
+5) Дождитесь примерно такой записи лога:
+```
+insurance_task-web-1  | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+```
+6) Зайдите в документацию сервиса по адресу - http://0.0.0.0:8000/docs
 
 
 ## Структура
