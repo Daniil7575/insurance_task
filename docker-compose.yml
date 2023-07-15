@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile.FastAPI
+    command: bash -c "aerich upgrade
+            && uvicorn main:app --host 0.0.0.0 --port 8000" 
+    # volumes:
+    #   - .:/stripe_project
+    # environment:
+      # - POSTGRES_DB_NAME=${DB_NAME}
+      # - POSTGRES_USER=${DB_USER}
+      # - POSTGRES_PASSWORD=${DB_PASS}
+      # - POSTGRES_HOST=${DB_HOST}
+      # - POSTGRES_PORT=${DB_PORT}
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    links:
+      - db
+
+  db:
+    image: postgres:15
+    build: 
+      context: .
+      dockerfile: Dockerfile.PostgreSQL
+    ports: 
+      - 8080:8080
+    environment:
+      - POSTGRES_DB_NAME=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_HOST=${DB_HOST}
+      - POSTGRES_PORT=${DB_PORT}
